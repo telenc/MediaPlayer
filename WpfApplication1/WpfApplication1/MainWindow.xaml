@@ -42,12 +42,12 @@
         <Button FontSize="20" HorizontalAlignment="Left" Margin="374,715,0,0" VerticalAlignment="Top" Width="67" Height="52" Click="Button_Click_3" Foreground="LightGray" Background="Transparent" BorderBrush="Transparent" FontWeight="ExtraBold">
             <Image Source="next.ico" Stretch="Fill" Height="49" Width="40"/>
         </Button>
-        <Button Background="Transparent" HorizontalAlignment="Left" BorderBrush="Transparent" Margin="541,715,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_7" Height="69">
+        <Button Background="Transparent" HorizontalAlignment="Left" BorderBrush="Transparent" Margin="553,715,0,0" VerticalAlignment="Top" Width="75" Click="morespeed" Height="69">
             <Image Source="faster.png" Stretch="Fill" Height="67" Width="65"/>
         </Button>
         <Slider x:Name="PositionControlSlider" HorizontalAlignment="Left" Margin="475,657,0,0" VerticalAlignment="Top" Width="564" ValueChanged="PositionControlSlider_ValueChanged" Height="18"/>
         <Button Content="FULLSCREEN" FontSize="20" HorizontalAlignment="Left" Margin="31,794,0,0" VerticalAlignment="Top" Width="165" Height="48" Click="Button_Click_9"/>
-        <Button FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="72" Height="52" Foreground="LightGray" BorderBrush="Transparent" Background="Transparent" FontWeight="ExtraBold" Click="Button_Click_6" Margin="302,715,0,0">
+        <Button FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="72" Height="52" Foreground="LightGray" BorderBrush="Transparent" Background="Transparent" FontWeight="ExtraBold" Click="nextInPlaylist" Margin="302,715,0,0">
             <Image Height="38" Source="previous.png" Stretch="Fill" Width="37"/>
         </Button>
         <Button Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Left" Margin="441,704,0,0" VerticalAlignment="Top" Width="89" Height="80">
