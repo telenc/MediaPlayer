@@ -15,28 +15,30 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Timers;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading;
-using MyWindowsMediaPlayerV2;
 using System.Speech.Recognition;
+using MyWindowsMediaPlayerV2;
 
 namespace WpfApplication1
 {
+    /// <summary>
+    /// Logique d'interaction pour MainWindow.xaml
+    /// </summary>
+
+
     public partial class MainWindow : Window
     {
 
-        public class        MediaCollection
+        public class MediaCollection
         {
             string SongName { set; get; }
             string AlbumName { set; get; }
             string StyleName { set; get; }
             string ArtistName { set; get; }
         }
-        string              pathOfPlaylist;
-        SpeechRecognizer    recognizer = new SpeechRecognizer();
-        delegate void       FuncPtr();
-        static Dictionary<string, FuncPtr> funcTab = new Dictionary<string, FuncPtr>();
+        string pathOfPlaylist;
+        SpeechRecognizer recognizer = new SpeechRecognizer();
+        delegate void FuncPtr();
+        Dictionary<string, FuncPtr> funcTab = new Dictionary<string, FuncPtr>();
         MyRemote myServerRemote = new MyRemote();
 
         public MainWindow()
@@ -67,50 +69,12 @@ namespace WpfApplication1
             funcTab["précédent"] = prevInPlaylist;
         }
 
-        public class MyRemote
-        {
-            public bool     _actived = false;
-            TcpListener     _serverSocket = new TcpListener(IPAddress.Any, 4242);
-            Thread          _threadServer;
-
-            public void     loopTcpRemote()
-            {
-                this._serverSocket.Start();
-                Socket myListenSocket = this._serverSocket.AcceptSocket();
-
-                while (this._actived == true)
-                {
-                    Byte[] receivedBuffer = new Byte[64];
-                    if (myListenSocket.Receive(receivedBuffer, receivedBuffer.Length, 0) > 0)
-                    {
-                        String dataReceived = System.Text.Encoding.ASCII.GetString(receivedBuffer);
-                        System.Windows.MessageBox.Show("[" + dataReceived + "]");
-                        //funcTab[dataReceived].Invoke();SEGFAULT ICI car non init je pense
-                    }
-                }
-            }
-
-            public void     startRemote()
-            {
-                this._threadServer = new Thread(new ThreadStart(this.loopTcpRemote));
-                this._threadServer.Start();
-            }
-
-            public void     stopRemote()
-            {
-                this._threadServer.Abort();
-                this._threadServer.Join();
-                System.Windows.MessageBox.Show("Network Thread Stoped");
-            }
-
-        }
-
         void mediaElement1_MouseDown(object sender, MouseButtonEventArgs e)
         {
             fullScreen();
         }
 
-        public void fullScreen()
+        void fullScreen()
         {
             LayoutRoot.Children.Remove(mediaElement1);
             this.Background = new SolidColorBrush(Colors.Black);
@@ -121,19 +85,19 @@ namespace WpfApplication1
             this.WindowState = WindowState.Maximized;
         }
 
-        public void reduceScreen()
+        void reduceScreen()
         {
             this.WindowStyle = WindowStyle.SingleBorderWindow;
             this.WindowState = WindowState.Normal;
         }
 
-        public void playFunc()
+        void playFunc()
         {
             mediaElement1.Play();
             mediaElement1.SpeedRatio = 1;
         }
 
-        public void stopFunc()
+        void stopFunc()
         {
             mediaElement1.Stop();
             mediaElement1.Close();
@@ -210,7 +174,7 @@ namespace WpfApplication1
 
         }
 
-        public void Button_Click_4(object sender, RoutedEventArgs e)
+        private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             mediaElement1.Pause();
         }
@@ -264,12 +228,12 @@ namespace WpfApplication1
             prevInPlaylist();
         }
 
-        private void nextInPlaylist(object sender, RoutedEventArgs e)
+        private void Button_Click_6(object sender, RoutedEventArgs e)
         {
             nextInPlaylist();
         }
 
-        public void nextInPlaylist()
+        void nextInPlaylist()
         {
             if (playlist.Items.Count > 0)
             {
@@ -282,7 +246,7 @@ namespace WpfApplication1
             }
         }
 
-        public void prevInPlaylist()
+        void prevInPlaylist()
         {
             if (playlist.Items.Count > 0)
             {
@@ -303,7 +267,7 @@ namespace WpfApplication1
             mediaElement1.Play();
         }
 
-        private void morespeed(object sender, RoutedEventArgs e)
+        private void Button_Click_7(object sender, RoutedEventArgs e)
         {
             mediaElement1.SpeedRatio += 2;
         }
