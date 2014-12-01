@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Timers;
 using System.Speech.Recognition;
+using MyWindowsMediaPlayerV2;
 
 namespace WpfApplication1
 {
@@ -34,18 +35,18 @@ namespace WpfApplication1
             string StyleName { set; get; }
             string ArtistName { set; get; }
         }
-
         string pathOfPlaylist;
         SpeechRecognizer recognizer = new SpeechRecognizer();
         delegate void FuncPtr();
         Dictionary<string, FuncPtr> funcTab = new Dictionary<string, FuncPtr>();
+        MyRemote myServerRemote = new MyRemote();
 
         public MainWindow()
         {
             InitializeComponent();
 
             recognizer.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(sre_SpeechRecognized);
-        
+
             mediaElement1.LoadedBehavior = MediaState.Manual;
             volumeLabel.Text = "100";
             volumeSlider.Value = 100.0;
@@ -120,19 +121,19 @@ namespace WpfApplication1
                 mediaElement1.Height = myWindows.Height;
                 mediaElement1.Play();
                 mediaElement1.SpeedRatio = 1;
-              /*  
-               * 
-               *               Update Slider based on mediaElement position doesn't work; 
-                 System.Timers.Timer timer = new System.Timers.Timer(1000);
-                 timer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimerElapsed);
+                /*  
+                 * 
+                 *               Update Slider based on mediaElement position doesn't work; 
+                   System.Timers.Timer timer = new System.Timers.Timer(1000);
+                   timer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimerElapsed);
 
-                timer.Interval = 1000;
-                timer.Enabled = true;
-              */   
+                  timer.Interval = 1000;
+                  timer.Enabled = true;
+                */
             }
             else
                 System.Windows.MessageBox.Show("Vous devez d'abord sélectionner un media a lire");
-               
+
         }
 
         void mediaElement1_MediaOpened(object sender, RoutedEventArgs e)
@@ -164,7 +165,7 @@ namespace WpfApplication1
             fileName = System.IO.Path.GetFileName(ofd.FileName);
             label1.Text = fileName;
             mediaElement1.Play();
-            mediaElement1.Volume = 100;        
+            mediaElement1.Volume = 100;
 
         }
 
@@ -186,9 +187,9 @@ namespace WpfApplication1
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-           volumeLabel.Text = ((int)(volumeSlider.Value * 10)).ToString();
-           mediaElement1.Volume = volumeSlider.Value / 100;
-        
+            volumeLabel.Text = ((int)(volumeSlider.Value * 10)).ToString();
+            mediaElement1.Volume = volumeSlider.Value / 100;
+
         }
 
         private void volumeLabel_TextChanged(object sender, TextChangedEventArgs e)
@@ -204,8 +205,8 @@ namespace WpfApplication1
                 label1.Text = playlist.SelectedItem.ToString();
                 mediaElement1.Play();
             }
-        
-         }
+
+        }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -279,8 +280,8 @@ namespace WpfApplication1
         {
             int SliderValue = (int)PositionControlSlider.Value;
 
- //            Overloaded constructor takes the arguments days, hours, minutes, seconds, miniseconds. 
- //            Create a TimeSpan with miliseconds equal to the slider value.
+            //            Overloaded constructor takes the arguments days, hours, minutes, seconds, miniseconds. 
+            //            Create a TimeSpan with miliseconds equal to the slider value.
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
             mediaElement1.Position = ts;
         }
@@ -313,6 +314,21 @@ namespace WpfApplication1
                 mediaElement1.Position = TimeSpan.FromSeconds(currentposition);
                 fullscreen = false;
             }*/
+        }
+
+        private void Button_Remote(object sender, RoutedEventArgs e)
+        {
+            myServerRemote._actived = (myServerRemote._actived == true) ? false : true;
+            if (myServerRemote._actived == true)
+            {
+                myServerRemote.startRemote();
+                System.Windows.MessageBox.Show("Thread .Net launched");
+            }
+            else
+            {
+                myServerRemote.stopRemote();
+                System.Windows.MessageBox.Show("Thread .Net Stoped");
+            }
         }
     }
 }
