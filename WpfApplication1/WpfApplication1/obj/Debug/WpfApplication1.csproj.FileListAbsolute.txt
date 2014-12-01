@@ -1,0 +1,15 @@
+c:\users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\MainWindow.baml
+c:\users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\MainWindow.g.cs
+c:\users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\App.g.cs
+c:\users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.csproj.GenerateResource.Cache
+C:\Users\benja_000\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\bin\Debug\MyToolkit.dll
+C:\Users\benja_000\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\bin\Debug\MyToolkit.xml
+C:\Users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.csprojResolveAssemblyReference.cache
+C:\Users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\bin\Debug\MyWindowsMediaPlayerV2.exe.config
+C:\Users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\bin\Debug\MyWindowsMediaPlayerV2.exe
+C:\Users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\bin\Debug\MyWindowsMediaPlayerV2.pdb
+C:\Users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2_MarkupCompile.cache
+C:\Users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2.g.resources
+C:\Users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2.Properties.Resources.resources
+C:\Users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2.exe
+C:\Users\benja_000\documents\visual studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2.pdb

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>MyToolkit</id>
+    <version>2.3.16.0</version>
+    <title>MyToolkit</title>
+    <authors>Rico Suter</authors>
+    <owners>Rico Suter</owners>
+    <licenseUrl>https://mytoolkit.codeplex.com/license</licenseUrl>
+    <projectUrl>https://mytoolkit.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MyToolkit is a set of .NET libraries containing lots of useful classes for various .NET platforms like WinRT, Windows Phone, WPF and Silverlight.</description>
+    <releaseNotes />
+    <dependencies>
+      <group targetFramework=".NETPortable0.0-sl50+wp71">
+        <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
