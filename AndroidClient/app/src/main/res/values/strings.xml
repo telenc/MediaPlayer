@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="app_name">AndroidClient</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_activity2">Activity2</string>
+    <string name="totolagrenouille">Lecture</string>
+    <string name="pauseRessource">pause</string>
+    <string name="stopRessource">stop</string>
+    <string name="prevRessource">Prev</string>
+    <string name="nextRessource">next</string>
+    <string name="MonitorTextView">Medium Text</string>
+    <string name="DeconnectionString">Deconection</string>
+
+</resources>
