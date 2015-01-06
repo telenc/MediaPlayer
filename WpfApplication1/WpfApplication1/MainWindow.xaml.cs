@@ -20,14 +20,10 @@ using MyWindowsMediaPlayerV2;
 
 namespace WpfApplication1
 {
-    /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
-    /// </summary>
-
-
+    delegate void FuncPtr();
+  
     public partial class MainWindow : Window
     {
-
         public class MediaCollection
         {
             string SongName { set; get; }
@@ -37,12 +33,12 @@ namespace WpfApplication1
         }
         string pathOfPlaylist;
         SpeechRecognizer recognizer = new SpeechRecognizer();
-        delegate void FuncPtr();
-        Dictionary<string, FuncPtr> funcTab = new Dictionary<string, FuncPtr>();
-        MyRemote myServerRemote = new MyRemote();
-
+        Dictionary<string, FuncPtr> totoTab = new Dictionary<string, FuncPtr>();
+        MyRemote myServerRemote;
+        
         public MainWindow()
         {
+           
             InitializeComponent();
 
             recognizer.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(sre_SpeechRecognized);
@@ -57,16 +53,16 @@ namespace WpfApplication1
 
             GrammarBuilder gb = new GrammarBuilder();
             gb.Append(color);
-
             Grammar g = new Grammar(gb);
             recognizer.LoadGrammar(g);
-            funcTab["play"] = playFunc;
-            funcTab["stop"] = stopFunc;
-            funcTab["pause"] = mediaElement1.Pause;
-            funcTab["plainécran"] = fullScreen;
-            funcTab["avancerapide"] = faster;
-            funcTab["suivant"] = nextInPlaylist;
-            funcTab["précédent"] = prevInPlaylist;
+            totoTab["play"] = playFunc;
+            totoTab["stop"] = stopFunc;
+            totoTab["pause"] = mediaElement1.Pause;
+            totoTab["plainécran"] = fullScreen;
+            totoTab["avancerapide"] = faster;
+            totoTab["suivant"] = nextInPlaylist;
+            totoTab["précédent"] = prevInPlaylist;
+            myServerRemote = new MyRemote(ref mediaElement1);
         }
 
         void mediaElement1_MouseDown(object sender, MouseButtonEventArgs e)
@@ -91,13 +87,18 @@ namespace WpfApplication1
             this.WindowState = WindowState.Normal;
         }
 
-        void playFunc()
+        public void pauseFunc()
+        {
+            mediaElement1.Pause();
+        }
+
+        public void playFunc()
         {
             mediaElement1.Play();
             mediaElement1.SpeedRatio = 1;
         }
 
-        void stopFunc()
+        public void stopFunc()
         {
             mediaElement1.Stop();
             mediaElement1.Close();
@@ -110,10 +111,10 @@ namespace WpfApplication1
 
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            funcTab[e.Result.Text].Invoke();
+            totoTab[e.Result.Text].Invoke();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        public void playClick(object sender, RoutedEventArgs e)
         {
             if (mediaElement1 != null)
             {

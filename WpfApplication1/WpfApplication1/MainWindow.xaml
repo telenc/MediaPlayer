@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <MediaElement  x:Name="mediaElement1" DataContextChanged="mediaElement1_DataContextChanged" HorizontalAlignment="Left" Margin="10,10,0,406.4"  MediaEnded="mediaElement1_MediaEnded" Width="1274"/>
-        <Button x:Name="playButton" Foreground="LightGray" FontSize="20" FontWeight="ExtraBold" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" Margin="31,715,0,0" VerticalAlignment="Top" Width="69" Click="Button_Click_1" Height="52">
+        <Button x:Name="playButton" Foreground="LightGray" FontSize="20" FontWeight="ExtraBold" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" Margin="31,715,0,0" VerticalAlignment="Top" Width="69" Click="playClick" Height="52">
             <Image Height="52" Source="Play-Normal-icon.png" Stretch="Fill" Width="59"/>
         </Button>
         <Button BorderBrush="Transparent" Background="Transparent" FontSize="20" FontWeight="ExtraBold" HorizontalAlignment="Left" Margin="105,715,0,0" VerticalAlignment="Top" Width="65" Height="52" Click="Button_Click_4">
