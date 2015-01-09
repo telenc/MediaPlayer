@@ -43,3 +43,18 @@ C:\Users\Maux\Documents\GitHub\MyWindowsMediaPlayerV2\WpfApplication1\WpfApplica
 \\vmware-host\Shared Folders\Desktop\MyWindowsMediaPlayerV2\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2.g.resources
 \\vmware-host\Shared Folders\Desktop\MyWindowsMediaPlayerV2\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2.Properties.Resources.resources
 \\vmware-host\Shared Folders\Desktop\MyWindowsMediaPlayerV2\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.csproj.GenerateResource.Cache
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\bin\Debug\MyWindowsMediaPlayerV2.exe.config
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2.exe
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2.pdb
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\bin\Debug\MyWindowsMediaPlayerV2.exe
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\bin\Debug\MyWindowsMediaPlayerV2.pdb
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\bin\Debug\MyToolkit.dll
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\bin\Debug\MyToolkit.xml
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\MainWindow.baml
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\MainWindow.g.cs
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\App.g.cs
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2_MarkupCompile.cache
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2.g.resources
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\MyWindowsMediaPlayerV2.Properties.Resources.resources
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.csproj.GenerateResource.Cache

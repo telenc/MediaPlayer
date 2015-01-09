@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-\\vmware-host\Shared Folders\Desktop\MyWindowsMediaPlayerV2\WpfApplication1\WpfApplication1\obj\Debug\
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\
 MyWindowsMediaPlayerV2
 none
 false
 DEBUG;TRACE
-\\vmware-host\Shared Folders\Desktop\MyWindowsMediaPlayerV2\WpfApplication1\WpfApplication1\App.xaml
+C:\Users\Maux\Documents\GitHub\NewLife\MediaPlayer\WpfApplication1\WpfApplication1\App.xaml
 11151548125
 
-10567649997
-15-1611547410
+11193312987
+151257344597
 MainWindow.xaml;
 
 False
