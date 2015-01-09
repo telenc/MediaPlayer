@@ -15,8 +15,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Timers;
+using System.Windows.Threading;
 using System.Speech.Recognition;
 using MyWindowsMediaPlayerV2;
+
 
 namespace WpfApplication1
 {
@@ -47,7 +49,7 @@ namespace WpfApplication1
             volumeLabel.Text = "100";
             volumeSlider.Value = 100.0;
             mediaElement1.MouseDown += mediaElement1_MouseDown;
-
+            
             Choices color = new Choices();
             color.Add(new string[] { "play", "stop", "pause", "plainécran", "avancerapide", "suivant", "précédent" });
 
@@ -57,45 +59,112 @@ namespace WpfApplication1
             recognizer.LoadGrammar(g);
             totoTab["play"] = playFunc;
             totoTab["stop"] = stopFunc;
-            totoTab["pause"] = mediaElement1.Pause;
+            /*Playfunc change */
+            totoTab["pause"] = playFunc;
             totoTab["plainécran"] = fullScreen;
             totoTab["avancerapide"] = faster;
             totoTab["suivant"] = nextInPlaylist;
             totoTab["précédent"] = prevInPlaylist;
             myServerRemote = new MyRemote(ref mediaElement1);
+         
+            mediaElement1.MediaOpened += this.mediaElement1_MediaOpened;
+        }
+
+        /* Function pour reduire panel */
+        private void reducePanel(object sender, RoutedEventArgs e)
+        {
+            Grid.SetColumnSpan(mediaElement1, 2);
+            GridPanel.Visibility = System.Windows.Visibility.Hidden;
+            btnShowPanel.IsEnabled = true;
+        }
+        /* Function pour show panel */
+        private void showPanel(object sender, RoutedEventArgs e)
+        {
+            Grid.SetColumnSpan(mediaElement1, 1);
+            GridPanel.Visibility = System.Windows.Visibility.Visible;
+            btnShowPanel.IsEnabled = false;
         }
 
         void mediaElement1_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            Console.WriteLine("Coucoucoucoucocuou");
             fullScreen();
         }
-
+        /* Ici ca a changé full screen */
+        bool isFullScreen = false;
+        Object sauvContent;
         void fullScreen()
         {
-            LayoutRoot.Children.Remove(mediaElement1);
-            this.Background = new SolidColorBrush(Colors.Black);
-            mediaElement1.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
-            mediaElement1.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
-            this.Content = mediaElement1;
-            this.WindowStyle = WindowStyle.None;
-            this.WindowState = WindowState.Maximized;
+            if (isFullScreen == false)
+            {
+                sauvContent = this.Content;
+                this.Content = mediaElement1;
+                LayoutRoot.Children.Remove(mediaElement1);
+                this.Background = new SolidColorBrush(Colors.Black);
+                
+                mediaElement1.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
+                mediaElement1.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
+               
+                this.WindowStyle = WindowStyle.None;
+                this.WindowState = WindowState.Maximized;
+                isFullScreen = true;
+            }
+            else
+            {
+                this.Background = new SolidColorBrush(Colors.White);
+              
+                this.Content = sauvContent;
+                LayoutRoot.Children.Add(mediaElement1);
+                
+                mediaElement1.Height = Double.NaN;
+                mediaElement1.Width = Double.NaN;
+                this.WindowStyle = WindowStyle.SingleBorderWindow;
+                this.WindowState = WindowState.Normal;
+                isFullScreen = false;
+            }
         }
-
+        /* sert plus a rien */
         void reduceScreen()
         {
             this.WindowStyle = WindowStyle.SingleBorderWindow;
             this.WindowState = WindowState.Normal;
         }
-
+        /* Sert plus a rien */
         public void pauseFunc()
         {
             mediaElement1.Pause();
         }
-
+        /* Ici ca change */
         public void playFunc()
         {
-            mediaElement1.Play();
-            mediaElement1.SpeedRatio = 1;
+            Image myImage3 = new Image();
+            BitmapImage bi3 = new BitmapImage();
+            bi3.BeginInit();
+            if (isPlay == false)
+            {
+                if (mediaElement1 != null && mediaElement1.Source != null)
+                {
+
+                    mediaElement1.Play();
+                    mediaElement1.SpeedRatio = 1;
+                    isPlay = true;
+
+                    bi3.UriSource = new Uri("Pause.png", UriKind.Relative);
+                    bi3.EndInit();
+                    imageButtonPlay.Source = bi3;
+                }
+                else
+                    System.Windows.MessageBox.Show("Vous devez d'abord sélectionner un media a lire");
+            }
+            else
+            {
+                mediaElement1.Pause();
+                bi3.UriSource = new Uri("Play-Normal-icon.png", UriKind.Relative);
+                bi3.EndInit();
+
+                imageButtonPlay.Source = bi3;
+                isPlay = false;
+            }
         }
 
         public void stopFunc()
@@ -114,37 +183,43 @@ namespace WpfApplication1
             totoTab[e.Result.Text].Invoke();
         }
 
+        /* Ici ca change */
+        bool isPlay = false;
         public void playClick(object sender, RoutedEventArgs e)
         {
-            if (mediaElement1 != null)
-            {
-                mediaElement1.Width = myWindows.Width;
-                mediaElement1.Height = myWindows.Height;
-                mediaElement1.Play();
-                mediaElement1.SpeedRatio = 1;
-                /*  
-                 * 
-                 *               Update Slider based on mediaElement position doesn't work; 
-                   System.Timers.Timer timer = new System.Timers.Timer(1000);
-                   timer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimerElapsed);
-
-                  timer.Interval = 1000;
-                  timer.Enabled = true;
-                */
-            }
-            else
-                System.Windows.MessageBox.Show("Vous devez d'abord sélectionner un media a lire");
-
+            playFunc();
         }
 
+        /* Ici ca change */
+        private TimeSpan TotalTime;
+        private DispatcherTimer _timer;
         void mediaElement1_MediaOpened(object sender, RoutedEventArgs e)
         {
-            PositionControlSlider.Maximum = mediaElement1.NaturalDuration.TimeSpan.TotalMilliseconds;
+            this._timer = new DispatcherTimer();
+            this._timer.Interval = TimeSpan.FromMilliseconds(200);
+            this._timer.Tick += new EventHandler(timerTick);
+            if (mediaElement1.NaturalDuration.HasTimeSpan)
+            {
+                TimeSpan ts = mediaElement1.NaturalDuration.TimeSpan;
+                PositionControlSlider.Maximum = ts.TotalSeconds;
+                PositionControlSlider.SmallChange = 1;
+                PositionControlSlider.LargeChange = Math.Min(10, ts.Seconds / 10);
+                _timer.Start();
+            }
         }
 
+        private void timerTick(Object sender, EventArgs e)
+        {
+            PositionControlSlider.Value = this.mediaElement1.Position.Seconds ;
+            
+        }
+
+
+ 
         void mediaElement1_MediaEnded(object sender, RoutedEventArgs e)
         {
             System.Windows.MessageBox.Show("Media terminé");
+            _timer.Stop();
             if (playlist.Items.Count != 0 && playlist.SelectedIndex < playlist.Items.Count)
             {
                 playlist.SelectedIndex = playlist.SelectedIndex + 1;
@@ -162,7 +237,7 @@ namespace WpfApplication1
             ofd.Filter = "Media(*.*)|*.*";
             ofd.ShowDialog();
             mediaElement1.MediaOpened += new RoutedEventHandler(mediaElement1_MediaOpened);
-            mediaElement1.Source = new Uri(ofd.FileName);
+            //mediaElement1.Source = new Uri(ofd.FileName);
             fileName = System.IO.Path.GetFileName(ofd.FileName);
             label1.Text = fileName;
             mediaElement1.Play();
@@ -177,7 +252,8 @@ namespace WpfApplication1
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            mediaElement1.Pause();
+
+            playFunc();
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
@@ -262,6 +338,7 @@ namespace WpfApplication1
 
         private void mediaElement1_Ended(object sender, MediaScriptCommandRoutedEventArgs e)
         {
+            Console.WriteLine("MEDIA ENDED");
             if (playlist.SelectedIndex < playlist.Items.Count)
                 playlist.SelectedIndex = playlist.SelectedIndex + 1;
             mediaElement1.Source = new Uri(pathOfPlaylist + "\\" + playlist.SelectedItem.ToString());
@@ -281,14 +358,19 @@ namespace WpfApplication1
         {
             int SliderValue = (int)PositionControlSlider.Value;
 
-            //            Overloaded constructor takes the arguments days, hours, minutes, seconds, miniseconds. 
-            //            Create a TimeSpan with miliseconds equal to the slider value.
-            TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
-            mediaElement1.Position = ts;
+            if (mediaElement1.Position.Seconds != SliderValue)
+            {
+                //            Overloaded constructor takes the arguments days, hours, minutes, seconds, miniseconds. 
+                //            Create a TimeSpan with miliseconds equal to the slider value.
+                TimeSpan ts = new TimeSpan(0, 0, 0, SliderValue, 0);
+
+                mediaElement1.Position = ts;
+            }
         }
 
         private void mediaElement1_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            System.Windows.MessageBox.Show("Coucoucocuou");
             PositionControlSlider.Value = mediaElement1.Position.Seconds;
         }
 
