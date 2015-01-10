@@ -7,32 +7,28 @@ using System.Speech.Recognition;
 
 namespace WpfApplication1
 {
-    class Speecher : SpeechRecognizer
+    public class Speecher : SpeechRecognizer
     {
-        private Dictionary<string, FuncPtr> funcTab;
+        public Dictionary<string, FuncPtr> _funcTab;
 
         public Speecher(ref Dictionary<string, FuncPtr> funcTab,
-                        EventHandler<SpeechRecognizedEventArgs> e)
+                        EventHandler<SpeechRecognizedEventArgs> speechEvent)
         {
             Choices color;
             GrammarBuilder gb;
 
-            this.SpeechRecognized += e;
             color = new Choices();
             color.Add(new string[] { "play", "stop", "pause", "plainécran", "avancerapide", "suivant", "précédent" });
             gb = new GrammarBuilder();
             gb.Append(color);
             this.LoadGrammar(new Grammar(gb));
-        }
-
-        public void addRecognizedHandlerEvent(EventHandler<SpeechRecognizedEventArgs> e)
-        {
-            this.SpeechRecognized += e;
+            this._funcTab = funcTab;
+            this.SpeechRecognized += speechEvent;
         }
 
         public void Invoke(String stringTrigger)
         {
-            this.funcTab[stringTrigger].Invoke();
+            this._funcTab[stringTrigger].Invoke();
         }
     }
 }

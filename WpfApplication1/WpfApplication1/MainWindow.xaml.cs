@@ -21,12 +21,12 @@ using MyWindowsMediaPlayerV2;
 
 namespace WpfApplication1
 {
-    delegate void FuncPtr();
+    public delegate void FuncPtr();
   
     public partial class MainWindow : Window
     {
-        string                      _pathOfPlaylist;
         Dictionary<string, FuncPtr> _funcTab = new Dictionary<string, FuncPtr>();
+        string _pathOfPlaylist;
         MyRemote                    _remoteServer;
         bool                        _isFullScreen = false;
         bool                        _isPlaying = false;
@@ -50,7 +50,7 @@ namespace WpfApplication1
             _funcTab["avancerapide"] = faster;
             _funcTab["suivant"] = nextInPlaylist;
             _funcTab["précédent"] = prevInPlaylist;
-            _remoteServer = new MyRemote(ref mediaElement1);
+            _remoteServer = new MyRemote(ref _funcTab);
             _speecher = new Speecher(ref _funcTab, new EventHandler<SpeechRecognizedEventArgs>(sre_SpeechRecognized));         
             mediaElement1.MediaOpened += this.mediaElement1_MediaOpened;
         }
@@ -172,13 +172,11 @@ namespace WpfApplication1
 
         void timerTick(Object sender, EventArgs e)
         {
-            PositionControlSlider.Value = this.mediaElement1.Position.Seconds ;
-            
+            PositionControlSlider.Value = this.mediaElement1.Position.Seconds;
         }
 
         void mediaElement1_MediaEnded(object sender, RoutedEventArgs e)
         {
-            System.Windows.MessageBox.Show("Media terminé");
             _timer.Stop();
             if (playlist.Items.Count != 0 && playlist.SelectedIndex < playlist.Items.Count)
             {

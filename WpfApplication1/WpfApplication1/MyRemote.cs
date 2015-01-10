@@ -10,19 +10,19 @@ namespace WpfApplication1
         {
             public bool     _actived = false;
             TcpListener     _serverSocket = new TcpListener(IPAddress.Any ,4242);
-            Thread          _threadServer;
-            private System.Windows.Controls.MediaElement mediaElement1;
-           
-            public    MyRemote(ref System.Windows.Controls.MediaElement mediaElement1)
+            Thread          _threadServer; 
+            public Dictionary<string, FuncPtr> _funcTab;
+
+            public MyRemote(ref Dictionary<string, FuncPtr> funcTab)
                 {
-                    this.mediaElement1 = mediaElement1;
+                    this._funcTab = funcTab;
                 }
             
             public void loopTcpRemote()
             {
                 this._serverSocket.Start();
                 Socket myListenSocket = this._serverSocket.AcceptSocket();                               
-                System.Windows.MessageBox.Show("Client Resquest accepted, socket init");
+                System.Windows.MessageBox.Show("Client accepted");
                 Byte[] receivedBuffer = new Byte[8];
 
                 while (this._actived == true)
@@ -31,17 +31,9 @@ namespace WpfApplication1
                     String dataReceived = System.Text.Encoding.ASCII.GetString(receivedBuffer);
                     dataReceived = dataReceived.Replace("\0", String.Empty);
                     System.Windows.MessageBox.Show("[" + dataReceived + "]");
-                    if (dataReceived.Equals("play") == true) {
-                        this.mediaElement1.Play();
-                        this.mediaElement1.SpeedRatio = 1; }
-                    else if (dataReceived.Equals("stop") == true)
+                    if (dataReceived.Equals("play") == true || dataReceived.Equals("pause") == true || dataReceived.Equals("stop") == true)// ||
                     {
-                        this.mediaElement1.Stop();
-                        this.mediaElement1.Close();
-                    }
-                    else if (dataReceived.Equals("pause") == true)
-                    {
-                        this.mediaElement1.Pause();
+                        this._funcTab[dataReceived].Invoke();
                     }
                     dataReceived.Remove(0);
                 }
