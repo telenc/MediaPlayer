@@ -75,9 +75,35 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
+<<<<<<< HEAD
 
             <Button Grid.Column="0" Grid.Row="0" x:Name="playButton" Foreground="LightGray" FontSize="20" FontWeight="ExtraBold" BorderBrush="#FF1C252C" Background="Transparent"  Click="playClick"  BorderThickness="0,0,2,2" >
                 <Image x:Name="imageButtonPlay" Height="20" Source="Ressources/play2.png" Stretch="Fill" Width="18" HorizontalAlignment="Center" VerticalAlignment="Center" OpacityMask="#FFEB0F0F"/>
+=======
+            <Slider  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="13" x:Name="PositionControlSlider"  ValueChanged="PositionControlSlider_ValueChanged" BorderBrush="#FFF22929" RenderTransformOrigin="0.5,0.5" />
+            <Button x:Name="btnShowPanel" Grid.Column="14" Click="showPanel">Show</Button>
+            <Button Grid.Column="0" Grid.Row="1" x:Name="playButton" Foreground="LightGray" FontSize="20" FontWeight="ExtraBold" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" Click="playClick" >
+                <Image x:Name="imageButtonPlay" Height="52" Source="Play-Normal-icon.png" Stretch="Fill" Width="59"/>
+            </Button>
+            <Button Grid.Column="2" Grid.Row="1" Foreground="LightGray" BorderBrush="Transparent" Background="Transparent" FontSize="20" FontWeight="ExtraBold" Click="stopButtonClick">
+                <Image Source="Stop.png" Stretch="Fill" Height="49" Width="55"/>
+            </Button>
+            <Button Grid.Column="3" Grid.Row="1" Foreground="LightGray" BorderBrush="Transparent" Background="Transparent" FontSize="20" FontWeight="ExtraBold" Click="addFileButtonClick" RenderTransformOrigin="0.5,0.5">
+                Add File
+            </Button>
+            <TextBox Grid.Column="4" Grid.Row="1" x:Name="label1" FontWeight="ExtraBold" BorderBrush="Transparent" Background="Transparent" FontSize="15" Foreground="LightGray" TextWrapping="Wrap" Text=""  TextChanged="label1_TextChanged"/>
+            <Slider Grid.Column="5" Grid.Row="1" x:Name="volumeSlider" ValueChanged="Slider_ValueChanged" Orientation="Vertical"/>
+            <TextBox Grid.Column="6" Grid.Row="1" x:Name="volumeLabel" FontWeight="ExtraBold" Foreground="LightGray" Background="Transparent" BorderBrush="Transparent" FontSize="20" />
+            <Button Grid.Column="7" Grid.Row="1" Content="Add playlist from folder" Foreground="LightGray" Background="#3498db" FontSize="14" FontWeight="ExtraBold" Click="folderToPlaylist"/>
+            <Button Grid.Column="8" Grid.Row="1" FontSize="20" Click="prevInPlaylistClick" Foreground="LightGray" Background="Transparent" BorderBrush="Transparent" FontWeight="ExtraBold">
+                <Image Source="next.ico" Grid.Row="1" Stretch="Fill" Height="49" Width="40"/>
+            </Button>
+            <Button Grid.Column="9" Grid.Row="1" Background="Transparent"  BorderBrush="Transparent"  Click="fasterClick" >
+                <Image Source="faster.png" Stretch="Fill" Height="67" Width="65"/>                
+            </Button>
+            <Button Grid.Column="12" Grid.Row="1" FontSize="20"  Foreground="LightGray" BorderBrush="Transparent" Background="Transparent" FontWeight="ExtraBold" Click="nextInPlaylistClick">
+                <Image Height="38"  Source="previous.png" Stretch="Fill" Width="37"/>
+>>>>>>> 4601e08e833a244a6b95427dc03d9441d4ea356d
             </Button>
 
             <Button BorderThickness="0,0,2,2" BorderBrush="#FF1C252C" Grid.Column="0" Grid.Row="1" Foreground="LightGray"  Background="Transparent" FontSize="20" FontWeight="ExtraBold" Click="stopButtonClick" Margin="0,0.5,-0.5,0" >

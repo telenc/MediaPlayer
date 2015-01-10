@@ -4,16 +4,28 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 \\vmware-host\Shared Folders\Desktop\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\
+=======
+C:\Users\benja_000\Documents\GitHub\MediaPlayer\WpfApplication1\WpfApplication1\obj\Debug\
+>>>>>>> 4601e08e833a244a6b95427dc03d9441d4ea356d
 MyWindowsMediaPlayerV2
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 \\vmware-host\Shared Folders\Desktop\MediaPlayer\WpfApplication1\WpfApplication1\App.xaml
 11151548125
 
 7-1196169642
 65-1864582147
+=======
+C:\Users\benja_000\Documents\GitHub\MediaPlayer\WpfApplication1\WpfApplication1\App.xaml
+11151548125
+
+7-1196169642
+65154195489
+>>>>>>> 4601e08e833a244a6b95427dc03d9441d4ea356d
 MainWindow.xaml;
 
 False
