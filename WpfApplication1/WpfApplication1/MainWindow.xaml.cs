@@ -240,20 +240,19 @@ namespace WpfApplication1
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
-            if (result != null)//check DialogResult.ok ==
+
+            PlayList pl = new PlayList(fbd);
+
+            _pathOfPlaylist = fbd.SelectedPath;
+            
+            for (int i = 0; i < pl._directory.Length; i++)
             {
-                string[] file = Directory.GetFiles(fbd.SelectedPath);
-                _pathOfPlaylist = fbd.SelectedPath;
-                List<string> fileList = new List<string>();
-                for (int i = 0; i < file.Length; i++)
-                {
-                    String extension = System.IO.Path.GetExtension(file[i]);
-                    if (extension == ".bmp" || extension == ".jpg" || extension == ".mp3" || extension == ".mp4" || extension == ".avi" ||
-                        extension == ".mkv" || extension == ".ogg" || extension == ".flv")
-                        fileList.Add(System.IO.Path.GetFileName(file[i]));
-                    }
-                playlist.ItemsSource = fileList;
+                String extension = System.IO.Path.GetExtension(pl._directory[i]);
+                if (extension == ".bmp" || extension == ".jpg" || extension == ".mp3" || extension == ".mp4" || extension == ".avi" ||
+                    extension == ".mkv" || extension == ".ogg" || extension == ".flv")
+                    pl.fileList.Add(System.IO.Path.GetFileName(pl._directory[i]));
             }
+            playlist.ItemsSource = pl.fileList;
         }
 
         void prevInPlaylistClick(object sender, RoutedEventArgs e)
