@@ -57,14 +57,14 @@ namespace WpfApplication1
 
         void reducePanel(object sender, RoutedEventArgs e)
         {
-            Grid.SetColumnSpan(mediaElement1, 2);
+            //Grid.SetColumnSpan(mediaElement1, 2);
             GridPanel.Visibility = System.Windows.Visibility.Hidden;
             btnShowPanel.IsEnabled = true;
         }
 
         void showPanel(object sender, RoutedEventArgs e)
         {
-            Grid.SetColumnSpan(mediaElement1, 1);
+            //Grid.SetColumnSpan(mediaElement1, 1);
             GridPanel.Visibility = System.Windows.Visibility.Visible;
             btnShowPanel.IsEnabled = false;
         }
@@ -117,7 +117,7 @@ namespace WpfApplication1
                     mediaElement1.Play();
                     mediaElement1.SpeedRatio = 1;
                     _isPlaying = true;
-                    bi3.UriSource = new Uri("Pause.png", UriKind.Relative);
+                    bi3.UriSource = new Uri("Ressources/Pause.png", UriKind.Relative);
                     bi3.EndInit();
                     imageButtonPlay.Source = bi3;
                 }
@@ -127,7 +127,7 @@ namespace WpfApplication1
             else
             {
                 mediaElement1.Pause();
-                bi3.UriSource = new Uri("Play-Normal-icon.png", UriKind.Relative);
+                bi3.UriSource = new Uri("Ressources/play2.png", UriKind.Relative);
                 bi3.EndInit();
                 imageButtonPlay.Source = bi3;
                 _isPlaying = false;
