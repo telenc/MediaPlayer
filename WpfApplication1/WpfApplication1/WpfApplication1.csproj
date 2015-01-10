@@ -167,6 +167,44 @@
   <ItemGroup>
     <Resource Include="31912.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\play2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\stop2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\nextLeft.png" />
+    <Resource Include="Ressources\nextRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\ratioLeft.png" />
+    <Resource Include="Ressources\ratioRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\AddFile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\directory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\suffle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\hidePanelFleche.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\showPanelFleche.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
