@@ -18,18 +18,19 @@ using System.Timers;
 using System.Windows.Threading;
 using System.Speech.Recognition;
 using MyWindowsMediaPlayerV2;
+using System.Threading;
 
 namespace WpfApplication1
 {
-    public delegate void FuncPtr();
+    public delegate void FuncPtr();//putain de delegate de merde, le c# c nul
   
     public partial class MainWindow : Window
     {
         Dictionary<string, FuncPtr> _funcTab = new Dictionary<string, FuncPtr>();
-        string _pathOfPlaylist;
-        MyRemote                    _remoteServer;
+        string                      _pathOfPlaylist;
         bool                        _isFullScreen = false;
         bool                        _isPlaying = false;
+        MyRemote                    _remoteServer;
         DispatcherTimer             _timer;
         Speecher                    _speecher;
         Object                      sauvContent;
@@ -49,22 +50,21 @@ namespace WpfApplication1
             _funcTab["plainécran"] = fullScreen;
             _funcTab["avancerapide"] = faster;
             _funcTab["suivant"] = nextInPlaylist;
-            _funcTab["précédent"] = prevInPlaylist;
-            _remoteServer = new MyRemote(ref _funcTab);
+            _funcTab["precedent"] = prevInPlaylist;
+            _remoteServer = new MyRemote();
+            _remoteServer._funcTab = _funcTab;
             _speecher = new Speecher(ref _funcTab, new EventHandler<SpeechRecognizedEventArgs>(sre_SpeechRecognized));         
             mediaElement1.MediaOpened += this.mediaElement1_MediaOpened;
         }
 
         void reducePanel(object sender, RoutedEventArgs e)
         {
-            //Grid.SetColumnSpan(mediaElement1, 2);
             GridPanel.Visibility = System.Windows.Visibility.Hidden;
             btnShowPanel.IsEnabled = true;
         }
 
         void showPanel(object sender, RoutedEventArgs e)
         {
-            //Grid.SetColumnSpan(mediaElement1, 1);
             GridPanel.Visibility = System.Windows.Visibility.Visible;
             btnShowPanel.IsEnabled = false;
         }
@@ -137,6 +137,7 @@ namespace WpfApplication1
         {
             mediaElement1.Stop();
             mediaElement1.Close();
+            _isPlaying = false;
         }
 
         void faster()
@@ -182,11 +183,12 @@ namespace WpfApplication1
                 playlist.SelectedIndex = playlist.SelectedIndex + 1;
                 mediaElement1.Source = new Uri(_pathOfPlaylist + "\\" + playlist.SelectedItem.ToString());
                 mediaElement1.Play();
+                _isPlaying = true;
             }
         }
 
         void addFileButtonClick(object sender, RoutedEventArgs e)
-        {//what the fuck is that func ? -> Add1FileNotFolder
+        {
             string fileName;
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.AddExtension = true;
@@ -199,6 +201,7 @@ namespace WpfApplication1
             label1.Text = fileName;
             mediaElement1.Play();
             mediaElement1.Volume = 100;
+            _isPlaying = true;
         }
 
         void label1_TextChanged(object sender, RoutedEventArgs e)
@@ -215,13 +218,13 @@ namespace WpfApplication1
         {
             mediaElement1.Stop();
             mediaElement1.Close();
+            _isPlaying = false;
         }
 
         void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             volumeLabel.Text = ((int)(volumeSlider.Value * 10)).ToString();
             mediaElement1.Volume = volumeSlider.Value / 100;
-
         }
 
         void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -231,6 +234,7 @@ namespace WpfApplication1
                 mediaElement1.Source = new Uri(_pathOfPlaylist + "\\" + playlist.SelectedItem.ToString());
                 label1.Text = playlist.SelectedItem.ToString();
                 mediaElement1.Play();
+                _isPlaying = true;
             }
 
         }
@@ -241,9 +245,7 @@ namespace WpfApplication1
             DialogResult result = fbd.ShowDialog();
 
             PlayList pl = new PlayList(fbd);
-
-            _pathOfPlaylist = fbd.SelectedPath;
-            
+            _pathOfPlaylist = fbd.SelectedPath;            
             for (int i = 0; i < pl._directory.Length; i++)
             {
                 String extension = System.IO.Path.GetExtension(pl._directory[i]);
@@ -274,6 +276,7 @@ namespace WpfApplication1
                     playlist.SelectedIndex = 0;
                 mediaElement1.Source = new Uri(_pathOfPlaylist + "\\" + playlist.SelectedItem.ToString());
                 mediaElement1.Play();
+                _isPlaying = true;
             }
         }
 
@@ -287,6 +290,7 @@ namespace WpfApplication1
                     playlist.SelectedIndex = playlist.Items.Count;
                 mediaElement1.Source = new Uri(_pathOfPlaylist + "\\" + playlist.SelectedItem.ToString());
                 mediaElement1.Play();
+                _isPlaying = true;
             }
         }
 
@@ -296,6 +300,7 @@ namespace WpfApplication1
                 playlist.SelectedIndex = playlist.SelectedIndex + 1;
             mediaElement1.Source = new Uri(_pathOfPlaylist + "\\" + playlist.SelectedItem.ToString());
             mediaElement1.Play();
+            _isPlaying = true;
         }
 
         void fasterClick(object sender, RoutedEventArgs e)
@@ -314,9 +319,13 @@ namespace WpfApplication1
             }
         }
 
+        public void Invokefunc(String cmd)
+        {
+            this._funcTab[cmd].Invoke();
+        }
+
         void mediaElement1_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            System.Windows.MessageBox.Show("Coucoucocuou");
             PositionControlSlider.Value = mediaElement1.Position.Seconds;
         }
 
@@ -325,13 +334,18 @@ namespace WpfApplication1
             _remoteServer._actived = (_remoteServer._actived == true) ? false : true;
             if (_remoteServer._actived == true)
             {
-                _remoteServer.startRemote();
+                    this._remoteServer.loopTcpRemote();//));
+                    //              this._threadServer = new Thread(new ThreadStart(
+                    //                this._threadServer.Start();
+                    //               _remoteServer.startRemote();
                 System.Windows.MessageBox.Show("Thread .Net launched");
             }
             else
             {
-                _remoteServer.stopRemote();
-                System.Windows.MessageBox.Show("Thread .Net Stoped");
+                    //this._threadServer.Abort();
+                    //this._threadServer.Join();
+                System.Windows.MessageBox.Show("Network Thread Stoped");
+                    //                _remoteServer.stopRemote();
             }
         }
     }
