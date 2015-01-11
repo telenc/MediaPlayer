@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading;
 
 namespace WpfApplication1
 {
@@ -10,7 +9,6 @@ namespace WpfApplication1
     {
         public bool _actived = false;
         TcpListener _serverSocket = new TcpListener(IPAddress.Any, 4242);
-        Thread _threadServer;
         public Dictionary<string, FuncPtr> _funcTab;
 
         public void loopTcpRemote()
