@@ -254,15 +254,18 @@ namespace WpfApplication1
             DialogResult result = fbd.ShowDialog();
 
             PlayList pl = new PlayList(fbd);
-            _pathOfPlaylist = fbd.SelectedPath;            
-            for (int i = 0; i < pl._directory.Length; i++)
+            if (fbd.SelectedPath != "")
             {
-                String extension = System.IO.Path.GetExtension(pl._directory[i]);
-                if (extension == ".bmp" || extension == ".jpg" || extension == ".mp3" || extension == ".mp4" || extension == ".avi" ||
+                _pathOfPlaylist = fbd.SelectedPath;
+                for (int i = 0; i < pl._directory.Length; i++)
+                {
+                    String extension = System.IO.Path.GetExtension(pl._directory[i]);
+                    if (extension == ".bmp" || extension == ".jpg" || extension == ".mp3" || extension == ".mp4" || extension == ".avi" ||
                     extension == ".mkv" || extension == ".ogg" || extension == ".flv")
-                    pl.fileList.Add(System.IO.Path.GetFileName(pl._directory[i]));
+                        pl.fileList.Add(System.IO.Path.GetFileName(pl._directory[i]));
+                }
+                playlist.ItemsSource = pl.fileList;
             }
-            playlist.ItemsSource = pl.fileList;
         }
 
         void prevInPlaylistClick(object sender, RoutedEventArgs e)

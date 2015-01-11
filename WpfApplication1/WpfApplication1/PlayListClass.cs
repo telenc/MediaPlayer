@@ -16,8 +16,11 @@ public class PlayList
     public PlayList(System.Windows.Forms.FolderBrowserDialog fbd)
     {
         // TODO: Complete member initialization
-        _directory = Directory.GetFiles(fbd.SelectedPath);
-        this.fbd = fbd;
-        this._lenght = fileList.Count;
+        if (fbd.SelectedPath != "")
+        {
+            _directory = Directory.GetFiles(fbd.SelectedPath);
+            this.fbd = fbd;
+            this._lenght = fileList.Count;
+        }
     }
 }
