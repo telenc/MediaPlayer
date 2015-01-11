@@ -96,8 +96,8 @@ namespace WpfApplication1
             {
                 this.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF252E35"));
                 this.Content = sauvContent;
-                MediaRoot.Children.Add(mediaElement1);
-                
+               // MediaRoot.Children.Add(mediaElement1);
+                MediaRoot.Children.Insert(0, mediaElement1);
                 mediaElement1.Height = Double.NaN;
                 mediaElement1.Width = Double.NaN;
                 this.WindowStyle = WindowStyle.SingleBorderWindow;
