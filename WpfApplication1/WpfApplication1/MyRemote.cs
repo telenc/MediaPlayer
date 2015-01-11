@@ -22,10 +22,11 @@ namespace WpfApplication1
 
             while (this._actived == true)
             {
+                Array.Clear(receivedBuffer, 0, receivedBuffer.Length);
                 int bytesReceived = myListenSocket.Receive(receivedBuffer, receivedBuffer.Length, 0);
                 String dataReceived = System.Text.Encoding.ASCII.GetString(receivedBuffer);
                 Array.Clear(receivedBuffer, 0, receivedBuffer.Length);
-                System.Windows.MessageBox.Show("[" + dataReceived + "]");
+                dataReceived = dataReceived.Replace("\0", String.Empty);
                 if (dataReceived.Equals("play") == true || dataReceived.Equals("pause") == true || dataReceived.Equals("stop") == true ||
                     dataReceived.Equals("suivant") == true || dataReceived.Equals("précédent") == true || dataReceived.Equals("fuckoff") == true)
                 {
