@@ -32,7 +32,8 @@ namespace WpfApplication1
                 {
                     if (dataReceived.Equals("fuckoff") == true)
                         this._actived = false;
-                    this._funcTab[dataReceived].Invoke();
+                    else
+                        this._funcTab[dataReceived].Invoke();
                 }
                 else if (dataReceived.Equals(""))
                     this._actived = false;

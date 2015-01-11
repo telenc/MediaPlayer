@@ -202,12 +202,15 @@ namespace WpfApplication1
             ofd.Filter = "Media(*.*)|*.*";
             ofd.ShowDialog();
             mediaElement1.MediaOpened += new RoutedEventHandler(mediaElement1_MediaOpened);
-            mediaElement1.Source = new Uri(ofd.FileName);
-            fileName = System.IO.Path.GetFileName(ofd.FileName);
-            label1.Text = fileName;
-            mediaElement1.Play();
-            mediaElement1.Volume = 100;
-            _isPlaying = true;
+            if (ofd.FileName != "")
+            {
+                mediaElement1.Source = new Uri(ofd.FileName);
+                fileName = System.IO.Path.GetFileName(ofd.FileName);
+                label1.Text = fileName;
+                mediaElement1.Play();
+                mediaElement1.Volume = 100;
+                _isPlaying = true;
+            }
         }
 
         void label1_TextChanged(object sender, RoutedEventArgs e)
