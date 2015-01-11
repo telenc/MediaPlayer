@@ -7,6 +7,7 @@ public class PlayList
     public System.Windows.Forms.FolderBrowserDialog fbd;
     public string[] _directory { get; set; }
     public List<string> fileList = new List<string>();
+    public int _lenght { get; set; }
 
 	public PlayList()
 	{
@@ -17,5 +18,6 @@ public class PlayList
         // TODO: Complete member initialization
         _directory = Directory.GetFiles(fbd.SelectedPath);
         this.fbd = fbd;
+        this._lenght = fileList.Count;
     }
 }

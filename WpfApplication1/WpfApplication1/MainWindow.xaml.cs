@@ -34,6 +34,8 @@ namespace WpfApplication1
         DispatcherTimer             _timer;
         Speecher                    _speecher;
         Object                      sauvContent;
+        bool                        _isRepeat;
+        PlayList                    pl;
 
         public MainWindow()
         {           
@@ -80,7 +82,7 @@ namespace WpfApplication1
             {
                 sauvContent = this.Content;
                 this.Content = mediaElement1;
-                LayoutRoot.Children.Remove(mediaElement1);
+                MediaRoot.Children.Remove(mediaElement1);
                 this.Background = new SolidColorBrush(Colors.Black);
                 
                 mediaElement1.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
@@ -92,15 +94,14 @@ namespace WpfApplication1
             }
             else
             {
-                this.Background = new SolidColorBrush(Colors.White);
-              
+                this.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF252E35"));
                 this.Content = sauvContent;
-                LayoutRoot.Children.Add(mediaElement1);
+                MediaRoot.Children.Add(mediaElement1);
                 
                 mediaElement1.Height = Double.NaN;
                 mediaElement1.Width = Double.NaN;
                 this.WindowStyle = WindowStyle.SingleBorderWindow;
-                this.WindowState = WindowState.Normal;
+                this.WindowState = WindowState.Maximized;
                 _isFullScreen = false;
             }
         }
@@ -184,6 +185,11 @@ namespace WpfApplication1
                 mediaElement1.Source = new Uri(_pathOfPlaylist + "\\" + playlist.SelectedItem.ToString());
                 mediaElement1.Play();
                 _isPlaying = true;
+            }
+            if (_isRepeat == true)
+            {
+                mediaElement1.Stop();
+                mediaElement1.Play();
             }
         }
 
@@ -301,6 +307,8 @@ namespace WpfApplication1
             mediaElement1.Source = new Uri(_pathOfPlaylist + "\\" + playlist.SelectedItem.ToString());
             mediaElement1.Play();
             _isPlaying = true;
+            
+            //if (_isRepeat == true)
         }
 
         void fasterClick(object sender, RoutedEventArgs e)
@@ -348,5 +356,31 @@ namespace WpfApplication1
                     //                _remoteServer.stopRemote();
             }
         }
+
+        private void repeatMedia(object sender, RoutedEventArgs e)
+        {
+            if (_isRepeat == false)
+            {
+                System.Windows.MessageBox.Show("Repeat ON");
+                _isRepeat = true;
+            }
+            else
+            {
+                _isRepeat = false;
+                System.Windows.MessageBox.Show("Repeat OFF");
+            }
+        }
+
+        private void randomPlay(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+            int randomNumber = random.Next(0, playlist.Items.Count);
+
+            playlist.SelectedIndex = randomNumber;
+
+            mediaElement1.Source = new Uri(_pathOfPlaylist + "\\" + playlist.SelectedItem.ToString());
+            mediaElement1.Play();
+            _isPlaying = true;
+         }
     }
 }
