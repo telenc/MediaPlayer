@@ -103,7 +103,7 @@
                     <ColumnDefinition Width="50*"/>
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
-                <Button  BorderThickness="0,0,2,2" BorderBrush="#FF1C252C" Grid.Column="0" Grid.Row="0" Background="Transparent"  >
+                <Button  BorderThickness="0,0,2,2" BorderBrush="#FF1C252C" Grid.Column="0" Grid.Row="0" Background="Transparent" Click="resetSpeed"  >
                     <Image Source="Ressources/ratioLeft.png" Stretch="Fill" Height="22" Width="30"/>
                 </Button>
                 <Button  BorderThickness="0,0,2,2" BorderBrush="#FF1C252C"  Grid.Column="1" Grid.Row="0" Background="Transparent"   Click="fasterClick" >

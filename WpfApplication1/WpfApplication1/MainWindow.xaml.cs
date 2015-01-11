@@ -390,5 +390,10 @@ namespace WpfApplication1
                 _isPlaying = true;
             }
         }
+
+        private void resetSpeed(object sender, RoutedEventArgs e)
+        {
+            mediaElement1.SpeedRatio = 1;
+        }
     }
 }
