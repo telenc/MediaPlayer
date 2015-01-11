@@ -119,27 +119,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Play-Normal-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pause.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Stop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="previous.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="next.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="mageia-wallpaper1920-1080.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 et x64%29</ProductName>
@@ -157,16 +136,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="faster.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="lower.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="sample.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="31912.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Ressources\play2.png" />
