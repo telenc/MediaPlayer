@@ -107,7 +107,6 @@ namespace WpfApplication1
 
         void playFunc()
         {
-            Image myImage3 = new Image();
             BitmapImage bi3 = new BitmapImage();
             bi3.BeginInit();
             if (_isPlaying == false)
