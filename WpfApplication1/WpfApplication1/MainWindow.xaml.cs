@@ -383,10 +383,12 @@ namespace WpfApplication1
             int randomNumber = random.Next(0, playlist.Items.Count);
 
             playlist.SelectedIndex = randomNumber;
-
-            mediaElement1.Source = new Uri(_pathOfPlaylist + "\\" + playlist.SelectedItem.ToString());
-            mediaElement1.Play();
-            _isPlaying = true;
-         }
+            if (_pathOfPlaylist != "" && playlist.Items.Count != 0)
+            {
+                mediaElement1.Source = new Uri(_pathOfPlaylist + "\\" + playlist.SelectedItem.ToString());
+                mediaElement1.Play();
+                _isPlaying = true;
+            }
+        }
     }
 }
